@@ -1,4 +1,4 @@
-$("#start-btn").on("click",game.initializeGame());
+
 
 const quiz = {
   questions: [
@@ -26,11 +26,12 @@ const game = {
     this.correctCount = 0;
     this.incorrectCount = 0;
     $("#start-btn-container").css("display","none");
-    $("#question").css("display","block")
+    $("#question").css("display","block");
+    game.initiateQuestion(game.questionIndex)
   },
   selectAnswer: function (selected) {
-    questionIndex++;
-    if(selected === quiz.questions[questionIndex]) return this.correct;
+    game.questionIndex++;
+    if(selected === quiz.questions[game.questionIndex]) return this.correct;
     else {return this.incorrect}
   },
 
@@ -49,12 +50,15 @@ const game = {
    for(answer of quiz.questions[qIndex].answers) {
      let newAnswer = $("<span class='answer'>");
      newAnswer.attr("value",answer).text(answer);
-     $("#answers").append(newAnswer);
-   };
+     $("#answers").append(newAnswer).append("<br>");
+   }
+   $(document).on("click",".answer",this.selectAnswer); //add listener
    this.startQTimer()
   },
 
   startQTimer: function() {
-    //psuedocode 
+    //psuedocode
   }
 };
+
+$("#start-btn").on("click",game.initializeGame);
