@@ -39,11 +39,14 @@ let game = {
     game.initiateQuestion(game.questionIndex)
   },
   selectAnswer: function (selected) {
-    console.log(selected.target.innerText);
-    console.log(quiz.questions[game.questionIndex].correctAnswer);
     game.questionIndex++;
-    if(selected.target.innerText === quiz.questions[game.questionIndex-1].correctAnswer) {return game.correct()}
-    else {return game.incorrect()}
+    if(selected.target.innerText === quiz.questions[game.questionIndex-1].correctAnswer) {
+      selected.target.style.color = "#2db34a";
+      return game.correct()
+    }
+    else {
+      selected.target.style.color = "#d21034";
+      return game.incorrect()}
   },
 
   correct: function () {
@@ -58,6 +61,11 @@ let game = {
   },
 
   incorrect: function () {
+    $(".answer").each(function(){
+      if(this.innerText === quiz.questions[game.questionIndex-1].correctAnswer){
+        this.style.color = "#2db34a";
+      }
+    });
     $(document).off("click",".answer",this.selectAnswer);
     game.incorrectCount++;
     $("#after-question").text("Incorrect!");
@@ -84,13 +92,13 @@ let game = {
 
   startQTimer: function() {
     game.clockTimer = 10;
-    $("#timer").text(game.clockTimer);
+    $("#timer").text(`Time Remaining: ${game.clockTimer}`);
     intervalId = setInterval(game.clockStep,1000);
   },
 
   clockStep: function() {
     game.clockTimer--;
-    $("#timer").text(game.clockTimer);
+    $("#timer").text(`Time Remaining: ${game.clockTimer}`);
     if (game.clockTimer === 0) {
       clearInterval(intervalId);
       game.timeOut();

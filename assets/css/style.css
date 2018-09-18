@@ -4,13 +4,28 @@
 
 h1{
   font-family: 'Montserrat', sans-serif;
-  font-size: 300%;
+  font-size: 400%;
+  font-weight: 400;
 }
 
 h2{
   font-family: 'Montserrat', sans-serif;
   font-size: 150%;
   margin: 20px auto;
+}
+
+#title{
+  color: #005293;
+}
+
+body{
+  background-color: #999999;
+}
+
+#quiz{
+  background-color: #eeeeee;
+  border-radius: 15px;
+  padding: 20px;
 }
 
 #title{
@@ -33,6 +48,7 @@ h2{
 }
 #question{
   display: none;
+  margin: 10px auto;
 }
 
 #play-again-btn-container{
