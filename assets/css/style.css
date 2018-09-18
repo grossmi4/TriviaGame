@@ -1,0 +1,38 @@
+*{
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 300%;
+}
+
+h2{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 150%;
+  margin: 20px auto;
+}
+
+#title{
+  margin: 30px auto;
+  text-align: center;
+}
+
+#start-btn-container{
+  margin-top: 6%;
+  align-content: center;
+  text-align: center;
+  display: block;
+}
+
+#start-btn{
+  margin: auto;
+}
+.question{
+  text-align: center;
+  margin-top: 5%;
+}
+#question{
+  display: none;
+}
+
