@@ -19,15 +19,14 @@ h2{
 }
 
 #start-btn-container, #quiz{
-  margin-top: 6%;
   align-content: center;
   text-align: center;
   display: block;
+  width: 70%;
+  margin: 6% 15%;
 }
 
-#start-btn{
-  margin: auto;
-}
+
 .question{
   text-align: center;
   margin-top: 5%;
@@ -36,6 +35,20 @@ h2{
   display: none;
 }
 
+#play-again-btn-container{
+  display: none;
+  margin: 20px auto;
+  text-align: center;
+}
+
+#play-again-btn, #start-btn{
+  padding: 15px 30px;
+  border-radius: 5px;
+  color: #333333;
+  background-color: #ffffff;
+  border-color: #005293;
+  font-size: 150%;
+}
 #after-question{
   text-align: center;
   font-family: 'Montserrat', sans-serif;

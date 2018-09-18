@@ -16,7 +16,7 @@ const quiz = {
     },
     {question: `Which unit of energy was named in honour of an English scientist of the 19th century?`,
       answers: [`Hertz`, `Joule`, `Farad`],
-      correctAnswer: `Petiole`
+      correctAnswer: `Joule`
     },
     {question: `What substance produced from the plant is used to create its cell walls?`,
       answers: [`Lignin`, `Ligature`, `Cellulose`],
@@ -115,7 +115,8 @@ let game = {
       $("#timer").empty();
       $("#after-question").html(`<span>GAME OVER!</span><br>
       <span>Correct Answers: ${game.correctCount}</span><br>
-      <span>Incorrect Answers: ${game.incorrectCount}</span>`)
+      <span>Incorrect Answers: ${game.incorrectCount}</span>`);
+      $("#play-again-btn-container").css("display","block")
     }
     else{return(game.initiateQuestion(game.questionIndex))}
   }
