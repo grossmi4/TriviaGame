@@ -1,4 +1,4 @@
-
+let intervalId;
 
 const quiz = {
   questions: [
@@ -17,7 +17,9 @@ const quiz = {
   ]
 };
 
-const game = {
+let game = {
+  clockTimer: 0,
+  intervalId,
   questionIndex: 0,
   correctCount: 0,
   incorrectCount: 0,
@@ -30,17 +32,33 @@ const game = {
     game.initiateQuestion(game.questionIndex)
   },
   selectAnswer: function (selected) {
+    console.log(selected.target.innerText);
+    console.log(quiz.questions[game.questionIndex].correctAnswer);
     game.questionIndex++;
-    if(selected === quiz.questions[game.questionIndex]) return this.correct;
-    else {return this.incorrect}
+    if(selected.target.innerText === quiz.questions[game.questionIndex-1].correctAnswer) {return game.correct()}
+    else {return game.incorrect()}
   },
 
   correct: function () {
-    //code to clear question, display correct for 2 seconds, initiate next question
+    $(document).off("click",".answer",this.selectAnswer);
+    game.correctCount++;
+    $("#after-question").text("Correct!");
+    clearInterval(intervalId);
+    setTimeout(function(){
+      $("#after-question").empty();
+      game.endCheck();
+    },2000)
   },
 
   incorrect: function () {
-    //code to show incorrect, highlight correct answer, initiate next question
+    $(document).off("click",".answer",this.selectAnswer);
+    game.incorrectCount++;
+    $("#after-question").text("Incorrect!");
+    clearInterval(intervalId);
+    setTimeout(function(){
+      $("#after-question").empty();
+      game.endCheck();
+    },2000)
   },
 
   initiateQuestion: function (qIndex) {
@@ -49,7 +67,7 @@ const game = {
    $("#question").text(quiz.questions[qIndex].question);
    for(answer of quiz.questions[qIndex].answers) {
      let newAnswer = $("<span class='answer'>");
-     newAnswer.attr("value",answer).text(answer);
+     newAnswer.text(answer);
      $("#answers").append(newAnswer).append("<br>");
    }
    $(document).on("click",".answer",this.selectAnswer); //add listener
@@ -57,7 +75,38 @@ const game = {
   },
 
   startQTimer: function() {
-    //psuedocode
+    game.clockTimer = 30;
+    $("#timer").text(game.clockTimer);
+    intervalId = setInterval(game.clockStep,1000);
+  },
+
+  clockStep: function() {
+    game.clockTimer--;
+    $("#timer").text(game.clockTimer);
+    if (game.clockTimer === 0) {
+      clearInterval(intervalId);
+      game.timeOut();
+    }
+  },
+
+  timeOut: function() {
+    $("#after-question").text("Out of time!");
+    setTimeout(function(){
+      $("#after-question").empty();
+      game.endCheck();
+    },2000)
+  },
+
+  endCheck: function() {
+    if(game.questionIndex === quiz.questions.length){
+      $("#question").empty();
+      $("#answers").empty();
+      $("#timer").empty();
+      $("#after-question").html(`<span>GAME OVER!</span><br>
+      <span>Correct Answers: ${game.correctCount}</span><br>
+      <span>Incorrect Answers: ${game.incorrectCount}</span>`)
+    }
+    else{return(game.initiateQuestion(game.questionIndex))}
   }
 };
 

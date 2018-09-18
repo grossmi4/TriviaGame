@@ -18,7 +18,7 @@ h2{
   text-align: center;
 }
 
-#start-btn-container{
+#start-btn-container, #quiz{
   margin-top: 6%;
   align-content: center;
   text-align: center;
@@ -36,3 +36,23 @@ h2{
   display: none;
 }
 
+#after-question{
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 250%;
+  color: #333333;
+  margin: auto;
+}
+.answer {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 150%;
+  color: #333333;
+}
+.answer:hover {
+  cursor: pointer;
+  color: #005293;
+}
+#question {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 200%
+}
